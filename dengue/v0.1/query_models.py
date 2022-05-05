@@ -1,31 +1,20 @@
-#from cog import BasePredictor, Input, Path
-#import torch
-
-"""
-class Predictor(BasePredictor):
-    def setup(self):
-        #Load the model into memory.
-        self.model = pickle.load(open('./rfc.pkl', 'rb'))
-
-    # The arguments and types the model takes as input
-    def predict(self,
-          input: Path = Input(title="Grayscale input image")
-    ) -> Path:
-        Run a single prediction on the model
-        processed_input = preprocess(input)
-        output = self.model(processed_input)
-        return postprocess(output)
-"""
-
-
+# Libraries
 import pickle
 import pandas as pd
 
-m = pickle.load(open('./models/rfc.p', 'rb'))
+# Load a model
+m = pickle.load(open('./models/xgb/model.p', 'rb'))
 
+# Display model
 print(m)
 
+# Read dataset
 query = pd.read_excel(r'./OUCRU_dengue_shock.xlsx', nrows=10)
 
-r = m.predict(query)
-print(r)
+# Compute prediction
+pred = m.predict(query.iloc[:, :10])
+prob = m.predict_proba(query.iloc[:, :10])
+
+# Show
+print(pred)
+print(prob)

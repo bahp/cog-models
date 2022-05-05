@@ -1,9 +1,11 @@
 build:
-  gpu: true
+  gpu: false
   system_packages:
     - "libgl1-mesa-glx"
     - "libglib2.0-0"
-  python_version: "3.8"
+  python_version: "3.9"
   python_packages:
-    - "torch==1.8.1"
+    - "scikit-learn==0.24.2"
+    - "pandas==1.2.5"
+    - "xgboost==1.5.2"
 predict: "predict.py:Predictor"
