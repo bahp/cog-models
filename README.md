@@ -52,11 +52,11 @@ $ cog predict -i sex=1 age=12
 Or, build a Docker image for deployment:
 
 ```
-$ cog build -t django-shock-rfc-model
+$ cog build -t dengue-shock-rfc-model
 --> Building Docker image...
 --> Built my-colorization-model:latest
 
-$ docker run -d -p 5000:5000 --gpus all django-shock-rfc-model
+$ docker run -d -p 5000:5000 --gpus all dengue-shock-rfc-model
 
 $ curl http://localhost:5000/predictions -X POST \
     -H 'Content-Type: application/json' \

@@ -121,7 +121,7 @@ results = pd.DataFrame()
 
 models = [
     (xgb,'xgb'),
-    #(ann,'ann'),
+    (ann,'ann'),
     (rfc,'rfc')
 ]
 
