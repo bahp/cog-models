@@ -54,11 +54,24 @@ Or, build a Docker image for deployment:
 ```
 $ cog build -t dengue-shock-rfc-model
 --> Building Docker image...
---> Built my-colorization-model:latest
+--> Built dengue-shock-rfc-model
 
 $ docker run -d -p 5000:5000 --gpus all dengue-shock-rfc-model
 
 $ curl http://localhost:5000/predictions -X POST \
     -H 'Content-Type: application/json' \
     -d '{"input": {"sex": 1, "age": 12}}'
+
+--> {"status":"succeeded","output":0.017614366149118245}% 
 ```
+
+Save the image
+
+```
+$ docker sve dengue-shock-rfc-model > dengue-shock-rfc-model.tar
+```
+
+Also, the image could be stored in a container repository, for instance
+you could use the GitHub container registry and GitHub actions to publish 
+the images if needed. For more information see 
+https://blog.codecentric.de/en/2021/03/github-container-registry/
