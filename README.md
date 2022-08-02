@@ -40,24 +40,21 @@ the input parameters and types and the output type.
 
 First go to a model's folder (e.g. ./models/rfc/).
 
-Now, you can run predictions on this model:
-
-```
-$ cog predict -i sex=1 age=12
---> Building Docker image...
---> Running Prediction...
---> Output written to output.jpg
-```
-
-Or, build a Docker image for deployment:
+Now, build a Docker image for deployment:
 
 ```
 $ cog build -t dengue-shock-rfc-model
 --> Building Docker image...
 --> Built dengue-shock-rfc-model
 
-$ docker run -d -p 5000:5000 --gpus all dengue-shock-rfc-model
+$ docker run -d -p 5000:5000 dengue-shock-rfc-model
+```
 
+To make a query go to http://localhost:5000/docs.
+
+Otherwise you could use curl...
+
+```
 $ curl http://localhost:5000/predictions -X POST \
     -H 'Content-Type: application/json' \
     -d '{"input": {"sex": 1, "age": 12}}'
@@ -68,10 +65,13 @@ $ curl http://localhost:5000/predictions -X POST \
 Save the image
 
 ```
-$ docker sve dengue-shock-rfc-model > dengue-shock-rfc-model.tar
+$ docker save dengue-shock-rfc-model > dengue-shock-rfc-model.tar
 ```
 
 Also, the image could be stored in a container repository, for instance
 you could use the GitHub container registry and GitHub actions to publish 
 the images if needed. For more information see 
 https://blog.codecentric.de/en/2021/03/github-container-registry/
+
+Notes:
+  - Would it be possible to enable gpus with cog using --gpus all?

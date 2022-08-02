@@ -22,6 +22,10 @@ class Predictor(BasePredictor):
                 ) -> float:
         """Run a single prediction on the model
 
+        .. note: Algorithm was trained with cells/uL but the HTD
+                 collects x10^3cells/uL or kcells/uL. Conversion
+                 implemented within this method.
+
         .. note: It needs to create a dataframe with the name of the
                  features because the model has been trained using a
                  dataframe.
@@ -35,6 +39,11 @@ class Predictor(BasePredictor):
             columns=aux.keys(),
             data=[aux.values()]
         )
+
+        # cells/uL to kcells/uL
+        q.pltmin = q.pltmin*1000
+        q.pltmax = q.pltmax*1000
+        q.pltmedian = q.pltmedian * 1000
 
         # Return prediction
         return self.model.predict_proba(q)[:, 1]

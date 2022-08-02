@@ -11,6 +11,9 @@ print(m)
 # Read dataset
 query = pd.read_excel(r'./OUCRU_dengue_shock.xlsx', nrows=10)
 
+# Show
+print(query.head(5))
+
 # Compute prediction
 pred = m.predict(query.iloc[:, :10])
 prob = m.predict_proba(query.iloc[:, :10])
