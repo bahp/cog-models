@@ -1,5 +1,6 @@
 import cog
 import pickle
+import numpy as np
 import pandas as pd
 
 from cog import BasePredictor
@@ -21,6 +22,8 @@ class Predictor(BasePredictor):
                       pltmax: float=None
                 ) -> float:
         """Run a single prediction on the model
+
+        .. note: As of version 0.6.1 cog does not support np.narray.
 
         .. note: Algorithm was trained with cells/uL but the HTD
                  collects x10^3cells/uL or kcells/uL. Conversion
@@ -46,7 +49,7 @@ class Predictor(BasePredictor):
         q.pltmedian = q.pltmedian * 1000
 
         # Return prediction
-        return self.model.predict_proba(q)[:, 1]
+        return self.model.predict_proba(q)[0, 1]
 
 
 

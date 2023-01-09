@@ -46,7 +46,7 @@ class Predictor(BasePredictor):
         q.pltmedian = q.pltmedian * 1000
 
         # Return prediction
-        return self.model.predict_proba(q)[:, 1]
+        return self.model.predict_proba(q)[0, 1]
 
 
 
