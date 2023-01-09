@@ -1,6 +1,5 @@
 import cog
 import pickle
-import numpy as np
 import pandas as pd
 
 from cog import BasePredictor
